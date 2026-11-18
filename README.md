@@ -61,7 +61,7 @@ footer{padding:0 20px 24px;text-align:center;font-size:14px}
 <section id="intro">
   <span class="hero-pill">A quick personality quiz</span>
   <h1>Which Scootizien are you?</h1>
-  <p>Rate 10 short statements and find the Scoot role that matches your style best. It takes about 2 minutes.</p>
+  <p>Rate 12 short statements and find the Scoot role that matches your style best. It takes about 2 minutes.</p>
   <button class="btn" id="start">Start the quiz</button>
   <div class="note"><strong>Please note:</strong> this quiz is just for fun. It helps spread awareness of the different roles at Scoot and is not a tool for deciding whether you qualify for any job.</div>
 </section>
@@ -182,11 +182,11 @@ var INFO=[
 {p:"Revenue Management Analysts help Scoot sell the right seat, at the right price, to the right customer, at the right time.",r:["Manage seat inventory, fare classes and capacity on assigned routes","Forecast demand from booking patterns, seasons, festival peaks and no-shows","Set overbooking levels to reduce revenue lost to no-shows","Analyse booking, pricing and revenue data to find growth opportunities","Work with commercial, network planning and operations teams"],g:["Bachelor’s degree in business, economics, finance, accounting, maths, statistics or a related field","Microsoft Excel is essential, and revenue management or business intelligence tools are an advantage","Office-based, data-driven and commercially dynamic"]}
 ];
 var LABELS=["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"];
-var NQ=10,Q=[],ans=[],i=0;
+var PER=2,Q=[],ans=[],i=0;
 function $(id){return document.getElementById(id)}
 function show(id){["intro","quiz","out"].forEach(function(s){$(s).classList.toggle("hide",s!==id)});$("qrsec").classList.toggle("hide",id!=="intro");window.scrollTo(0,0)}
 function shuffle(a){for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1));var t=a[j];a[j]=a[k];a[k]=t}return a}
-function begin(){Q=[];ROLES.forEach(function(r,ri){r.q.forEach(function(t){Q.push({r:ri,t:t})})});shuffle(Q);Q=Q.slice(0,NQ);ans=[];i=0;show("quiz");render()}
+function begin(){Q=[];ROLES.forEach(function(r,ri){shuffle(r.q.slice()).slice(0,PER).forEach(function(t){Q.push({r:ri,t:t})})});shuffle(Q);ans=[];i=0;show("quiz");render()}
 function render(){
   $("q").textContent=Q[i].t;
   $("count").textContent="Statement "+(i+1)+" of "+Q.length;
